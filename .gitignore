@@ -6,3 +6,6 @@
 # macOS system files
 .DS_Store
 Thumbs.db
+
+# Ignore the data/original directory
+data/original/
