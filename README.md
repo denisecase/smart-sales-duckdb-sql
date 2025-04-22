@@ -219,10 +219,18 @@ Get-Content sql/21_sales_summary_totals.sql | duckdb dw/sales.duckdb
 
 ---
 
-## Recommended
+## Additional Notes
 
 Explore additional .sql files in the sql/ folder or write your own queries using VS Code or your preferred text editor.
 
 For an extended version of this project with Python and Jupyter notebooks, see the [realistic-sales-duckdb-python](https://github.com/denisecase/smart-sales-duckdb-sql-python) repo.
 
 Source: Kaggle (448 MB Full Clean Dataset): <https://www.kaggle.com/datasets/bhanuthakurr/cleaned-contoso-dataset>
+
+Note: The original fact table was 250MB. I used DuckDB to limit the size.
+Moved it into a data/original folder. 
+Opened DuckDB shell with the command `duckdb`
+and ran
+`COPY (SELECT * FROM read_csv_auto('data/original/FactSales.csv') LIMIT 100000) TO 'data/prepared/FactSales.csv' WITH (HEADER, DELIMITER ',');`
+
+Pretty impressed with [DuckDB](https://duckdb.org/).
