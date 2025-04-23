@@ -286,7 +286,7 @@ Write your own SQL queries and interactively run them against the .duckdb data w
 
 Save your SQL queries as .sql files and add them to the `sql/` folder.
 
-For an extended version of this project with Python and Jupyter notebooks, see the [realistic-sales-duckdb-python](https://github.com/denisecase/smart-sales-duckdb-sql-python) repo.
+For an extended version of this project with Python and Jupyter notebooks, see [smart-sales-duckdb-sql-python](https://github.com/denisecase/smart-sales-duckdb-sql-python).
 
 Source: Kaggle (448 MB Full Clean Dataset): <https://www.kaggle.com/datasets/bhanuthakurr/cleaned-contoso-dataset>
 
