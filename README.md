@@ -11,8 +11,8 @@ The data is a realistic set already provided in CSV files organized in a star sc
 **DuckDB** For the Data Warehouse (DW)
 
 - DuckDB is a newer datastore built especially for OLAP.  
-- It's about as easy to use as SQLite, but has improved support for built-in data types.  
-- It can run in-memory (just while scripts are running), or be persisted in a simple file.
+- It's about as easy to use as SQLite, and has improved support for built-in data types.  
+- It can run in-memory (just while scripts are running), and be persisted in a simple file.
 
 **SQL** For Querying the DW
 
@@ -29,7 +29,7 @@ The data is a realistic set already provided in CSV files organized in a star sc
 The folder structure matches our other smart sales projects.
 
 - data/prepared/ — Contains cleaned CSV files representing dimensions and fact tables.
-- dw/ — Contains sales.duckdb, a DuckDB database file loaded from the CSVs.
+- dw/ — Contains `sales.duckdb`, a DuckDB database file loaded from the CSVs.
 - sql/ — Contains SQL scripts for rebuilding the database and performing analysis.
 
 | Type      | File                        | Purpose                          |
@@ -119,7 +119,7 @@ By default, this opens PowerShell on Windows and zsh or bash on macOS or Linux.
 If you're on Windows, you can also select Git Bash from the dropdown if it's installed.
 
 The following command works in these terminal types: **zsh**, **bash**, and **Git Bash (on Windows)**.  
-We recommend Git Bash for consistency across platforms. It supports the handy redirection operator (<).
+We recommend Git Bash for consistency across platforms. It supports the handy redirection operator (`<`).
 
 The command: 
 
@@ -131,7 +131,7 @@ The command:
 duckdb dw/sales.duckdb < sql/00_build_dw.sql
 ```
 
-PowerShell doesn't support the < redirection operator. 
+PowerShell doesn't support the `<` redirection operator. 
 If you're using PowerShell, use this command instead.
 It reads the SQL file and pipes its content (provides it as input) to DuckDB:
 
@@ -174,7 +174,7 @@ The following command works in all terminal types (thank you DuckDB!)
 duckdb dw/sales.duckdb
 ```
 
-Once in the CLI, **at the D prompt**, type your SQL commands one at a time.
+Once in the CLI, **at the `D` prompt**, type your SQL commands one at a time.
 
 For example, try some of the following - e.g., just type SHOW TABLES; and hit Enter/Return after the semicolon (;) or after pasting with the mouse. 
 
@@ -219,9 +219,72 @@ Get-Content sql/21_sales_summary_totals.sql | duckdb dw/sales.duckdb
 
 ---
 
+## Key Command: duckdb
+
+Action:
+
+The `duckdb` command, when executed in a terminal (assuming DuckDB CLI is correctly installed and in your system's PATH), **starts the DuckDB command-line interface (CLI)** in an in-memory mode.
+
+What happens:
+
+- It launches the DuckDB interactive shell.
+- You'll typically see a prompt that looks something like D >.
+- In this mode, any data you create or load will exist only in the computer's memory for the duration of your current session. It will not be saved to a file unless you explicitly tell DuckDB to do so.
+- You can then type and execute SQL queries directly at the D > prompt.
+
+Use Cases:
+
+- Quick exploration of data you might paste directly into queries.
+- Testing out SQL syntax or DuckDB features without needing a persistent database file.
+- Creating temporary tables or views for immediate analysis.
+
+## Key Command: duckdb dw/sales.duckdb
+
+Action:
+
+The `duckdb` command followed by a database path **starts the DuckDB CLI and connects it to a specific DuckDB database file** named sales.duckdb located in the dw subdirectory of the current working directory.
+
+What happens:
+
+- It launches the DuckDB interactive shell.
+- It immediately opens (or creates if it doesn't exist) the database file dw/sales.duckdb.
+- Any SQL commands you execute will now interact with the data stored in this file.
+- Changes you make (e.g., creating tables, inserting data) will be persisted in the `dw/sales.duckdb` file and will be available in future sessions when you open the same file.
+
+Use Cases:
+
+- Working with a persistent DuckDB database.
+- Querying and analyzing data that has been previously loaded into the sales.duckdb file.
+- Building and modifying a data warehouse stored in a DuckDB file.
+
+## Key Command: duckdb dw/sales.duckdb < sql/00_build_dw.sql
+
+Action:
+
+This command **starts the DuckDB CLI, connects it to the `dw/sales.duckdb` database file, and then executes the SQL commands contained within the `sql/00_build_dw.sql` file** against that database. The `<` symbol is a redirection operator used in Bash, Zsh, and Git Bash to take the content of the specified file and feed it as input to the `duckdb` command.
+
+What happens:
+
+- It launches the DuckDB interactive shell.
+- It immediately opens (or creates if it doesn't exist) and connects to the database file dw/sales.duckdb.
+- The content of the `sql/00_build_dw.sql` file is read and executed by DuckDB. 
+- Unlike the previous commands, this command typically runs the SQL script and then exits the DuckDB CLI without presenting the interactive `D >` prompt. The output of the SQL execution (if any) will be displayed in the terminal.
+
+Use Cases:
+
+- Initialize a project data warehouse from CSV files.
+- Create or recreate a data warehouse from CSV files.
+- Run multiple SQL commands stored in a file without manually typing them into the DuckDB CLI.
+
+OS / Terminal Specific:
+- This command runs on Mac/Linux/Bash/Zsh/Git Bash/WSL
+- In PowerShell terminals, use: `Get-Content sql/00_build_dw.sql | duckdb dw/sales.duckdb`
+
 ## Additional Notes
 
-Explore additional .sql files in the sql/ folder or write your own queries using VS Code or your preferred text editor.
+Write your own SQL queries and interactively run them against the .duckdb data warehouse. 
+
+Save your SQL queries as .sql files and add them to the `sql/` folder.
 
 For an extended version of this project with Python and Jupyter notebooks, see the [realistic-sales-duckdb-python](https://github.com/denisecase/smart-sales-duckdb-sql-python) repo.
 
