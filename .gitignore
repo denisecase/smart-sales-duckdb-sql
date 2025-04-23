@@ -6,20 +6,9 @@
 #   / : Web apps and web addresses (URLs) - forward slashes.
 #   \ : Windows (native) is the only option that uses backslashes in paths.
 
-# Path Separators in .gitignore:
-# ALWAYS use forward slashes (/) in .gitignore files, regardless of operating system.
-# Backslashes (\) are specific to Windows and can cause problems in cross-platform contexts.
-
-# Visual Studio Code settings and workspace folder - Ignore entire .vscode folder 
-.vscode/*
-
-# macOS system files
-.DS_Store
-Thumbs.db
-
-# Ignore the data/original directory
-data/original/
-
+# General Note on Path Separators in .gitignore:
+#   ALWAYS use forward slashes (/) in .gitignore files, regardless of operating system.
+#   Backslashes (\) are specific to Windows and can cause problems in cross-platform contexts.
 
 # General Note BEFORE making changes to a project
 #    Open a terminal in the root project folder and run the following command (without the #):
@@ -30,3 +19,14 @@ data/original/
 #       git add .
 #       git commit -m "Your commit message here"
 #       git push -u origin main
+
+
+# Visual Studio Code settings and workspace folder - Ignore entire .vscode folder 
+.vscode/*
+
+# macOS system files
+.DS_Store
+Thumbs.db
+
+# Ignore the data/original directory
+data/original/
